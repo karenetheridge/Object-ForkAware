@@ -1,7 +1,7 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 16;
+use Test::More tests => 17;
 use Test::Warnings;
 
 use Object::ForkAware;
@@ -46,6 +46,8 @@ $PidTracker::instance = -1;
     # now wrap in a ForkAware object and watch the magic!
 
     my $obj = Object::ForkAware->new(create => sub { PidTracker->new });
+
+    is($PidTracker::instance, 0, 'an object has been instantiated already');
 
     looks_like_a_pidtracker($obj);
 

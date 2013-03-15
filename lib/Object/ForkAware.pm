@@ -13,8 +13,7 @@ sub new
 
     $self = bless($self, $class);
 
-    # TODO: lazy option?
-    $self->_create_obj($self->{_create});
+    $self->_create_obj($self->{_create}) if not $opts{lazy};
 
     return $self;
 }
@@ -33,7 +32,8 @@ sub _get_obj
 {
     my $self = shift;
 
-    if ($$ != $self->{_pid}
+    if (not defined $self->{_pid}
+        or $$ != $self->{_pid}
         or defined $self->{_tid} and $self->{_tid} != threads->tid)
     {
         $self->_create_obj($self->{_on_fork} || $self->{_create});
@@ -141,6 +141,11 @@ object instance.
 =item * C<on_fork> - a sub reference containing the code to be run when a fork
 is detected. It should either generate an exception or return the new object
 instance.
+
+=item * C<lazy> - a boolean (defaults to false) - when true, the C<create> sub
+is not called immediately, but instead deferred until the first time the
+object is used. This prevents useless object creation if it is not to be used
+until after the first fork.
 
 =back
 
