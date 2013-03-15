@@ -9,20 +9,21 @@ sub new
 
     my $self = {};
     $self->{_create} = $opts{create} || die 'missing required option: create';
+    $self->{_on_fork} = $opts{on_fork} if exists $opts{on_fork};
 
     $self = bless($self, $class);
 
     # TODO: lazy option?
-    $self->_create_obj;
+    $self->_create_obj($self->{_create});
 
     return $self;
 }
 
 sub _create_obj
 {
-    my $self = shift;
+    my ($self, $sub) = @_;
 
-    my $obj = $self->{_create}->();
+    my $obj = $sub->( defined $self->{_obj} ? $self->{_obj} : () );
     $self->{_pid} = $$;
     $self->{_tid} = threads->tid if $INC{'threads.pm'};
     $self->{_obj} = $obj;
@@ -35,7 +36,7 @@ sub _get_obj
     if ($$ != $self->{_pid}
         or defined $self->{_tid} and $self->{_tid} != threads->tid)
     {
-        $self->_create_obj;
+        $self->_create_obj($self->{_on_fork} || $self->{_create});
     }
 
     return $self->{_obj};
@@ -107,6 +108,22 @@ The object can be safely used with type checks and various type constraint
 mechanisms, as C<isa> and C<can> respond as if they were being called against
 the contained object itself.
 
+You can also ensure that a fork never happens, by making use of the optional
+C<on_fork> handler:
+
+    my $client = Object::ForkAware->new(
+        create => sub { MyClient->new(server => 'foo.com', port => '1234') },
+        on_fork => sub { die 'fork detected!' },
+    );
+
+Or, if regenerating the object needs to be done differently than the initial
+creation:
+
+    my $client = Object::ForkAware->new(
+        create => sub { MyClient->new(server => 'foo.com', port => '1234') },
+        on_fork => sub { MyClient->new(server => 'other.foo.com' },
+    );
+
 =head1 METHODS
 
 =over
@@ -121,13 +138,17 @@ Provides an instance of this class.  Available options are:
 when the object is initially created, as well as re-recreated, returning the
 object instance.
 
+=item * C<on_fork> - a sub reference containing the code to be run when a fork
+is detected. It should either generate an exception or return the new object
+instance.
+
 =back
 
 =back
 
 There are no other public methods. All method calls on the object will be
 passed through to the containing object, after checking C<$$> and possibly
-recreating the object via the provided C<create> sub.
+recreating the object via the provided C<create> (or C<on_fork>) sub.
 
 =for Pod::Coverage::TrustPod isa can
 
