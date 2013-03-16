@@ -1,8 +1,9 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 17;
+use Test::More tests => 18;
 use Test::Warnings;
+use Test::Fatal;
 
 use Object::ForkAware;
 
@@ -80,6 +81,14 @@ $PidTracker::instance = -1;
     # make sure we do not continue until after the child process exits
     waitpid($child_pid, 0);
     $Test->current_test($Test->current_test + 6);
+}
+
+{
+    like(
+        exception { Object::ForkAware->new },
+        qr/missing required option: create/,
+        'create is required',
+    );
 }
 
 sub looks_like_a_pidtracker
