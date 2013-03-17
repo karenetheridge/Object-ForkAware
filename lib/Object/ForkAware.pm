@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Object::ForkAware;
-# ABSTRACT: make an object aware of process forks, recreating itself as needed
+# ABSTRACT: Make an object aware of process forks, recreating itself as needed
 
 sub new
 {
