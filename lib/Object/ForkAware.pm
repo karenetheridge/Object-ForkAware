@@ -179,4 +179,6 @@ synopsis on a prefork job-processing daemon.
 
 L<Object::Wrapper>, L<Object::Wrapper::Fork>
 
+L<POSIX::AtFork>
+
 =cut
