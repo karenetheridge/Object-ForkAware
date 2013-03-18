@@ -165,8 +165,8 @@ overloading.  Partial support is possible, but is not yet implemented.
 
 =head1 SUPPORT
 
-Bugs may be submitted through L<https://rt.cpan.org/Public/Dist/Display.html?Name=Object-ForkAware>
-or L<bug-Object-ForkAware@rt.cpan.org>.
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Object-ForkAware>
+(or L<mailto:bug-Object-ForkAware@rt.cpan.org>).
 I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 ACKNOWLEDGEMENTS
