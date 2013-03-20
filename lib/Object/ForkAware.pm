@@ -82,7 +82,7 @@ __END__
     $client->send(...);
 
     # later, we fork for some reason
-    if (!fork) {
+    if (fork == 0) {
         # child process
         $client->send(...);
     }
