@@ -135,7 +135,8 @@ Provides an instance of this class.  Available options are:
 =over
 
 =item * C<create> (mandatory) - a sub reference containing the code to be run
-when the object is initially created, as well as re-recreated, returning the
+when the object is initially created (as well as recreated, if there is no
+C<on_fork> sub provided), returning the
 object instance.
 
 =item * C<on_fork> - a sub reference containing the code to be run when a fork
