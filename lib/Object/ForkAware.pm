@@ -71,6 +71,8 @@ __END__
 
 =pod
 
+=for stopwords other's prefork
+
 =head1 SYNOPSIS
 
     use Object::ForkAware;
