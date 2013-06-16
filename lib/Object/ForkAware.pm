@@ -140,6 +140,8 @@ Provides an instance of this class.  Available options are:
 when the object is initially created (as well as recreated, if there is no
 C<on_fork> sub provided), returning the
 object instance.
+If the object previously existed, it is passed as an argument to this method,
+allowing you to copy any state from the old object to the new one.
 
 =item * C<on_fork> - a sub reference containing the code to be run when a fork
 is detected. It should either generate an exception or return the new object
@@ -149,6 +151,8 @@ instance.
 is not called immediately, but instead deferred until the first time the
 object is used. This prevents useless object creation if it is not to be used
 until after the first fork.
+If the object previously existed, it is passed as an argument to this method,
+allowing you to copy any state from the old object to the new one.
 
 =back
 
