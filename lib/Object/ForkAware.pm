@@ -180,8 +180,12 @@ synopsis on a prefork job-processing daemon.
 
 =head1 SEE ALSO
 
-L<Object::Wrapper>, L<Object::Wrapper::Fork>
+=begin :list
 
-L<POSIX::AtFork>
+* L<Object::Wrapper>
+* L<Object::Wrapper::Fork>
+* L<POSIX::AtFork>
+
+=end :list
 
 =cut
