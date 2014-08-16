@@ -1,8 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 18;
-use Test::Warnings;
+use Test::More 'no_plan';
+use Test::Warnings 0.009 qw(:all :no_end_test);
 use Test::Fatal;
 
 use Object::ForkAware;
@@ -34,12 +34,14 @@ my $Test = Test::Builder->new;
 
         isnt($obj->pid, $$, 'object no longer has the right pid');
         is($obj->instance, 0, 'object is still instance #0');
+        had_no_warnings;
         exit;
     }
 
-    # make sure we do not continue until after the child process exits
-    waitpid($child_pid, 0);
     $Test->current_test($Test->current_test + 3);
+
+    # make sure we do not continue until after the child process exits
+    isnt(waitpid($child_pid, 0), '-1', 'waited for child to exit');
 }
 
 $PidTracker::instance = -1;
@@ -75,12 +77,15 @@ $PidTracker::instance = -1;
         looks_like_a_pidtracker($obj);
         is($obj->pid, $$, 'object was created in the current process');
         is($obj->instance, 1, 'this is now instance #1');
+
+        had_no_warnings;
         exit;
     }
 
+    $Test->current_test($Test->current_test + 9);
+
     # make sure we do not continue until after the child process exits
-    waitpid($child_pid, 0);
-    $Test->current_test($Test->current_test + 6);
+    isnt(waitpid($child_pid, 0), '-1', 'waited for child to exit');
 }
 
 {
@@ -95,11 +100,14 @@ sub looks_like_a_pidtracker
 {
     my $obj = shift;
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    subtest 'object quacks like a PidTracker' => sub {
+    # somehow, Test::More loses its marbles here during subtests and emits an
+    # extra plan in the middle!
+    #subtest 'object quacks like a PidTracker' => sub {
         ok($obj->isa('PidTracker'), '->isa works as if we called it on the target object');
         ok($obj->can('foo'), '->can works as if we called it on the target object');
         is($obj->can('foo'), \&PidTracker::foo, '...and returns the correct reference');
         is($obj->foo, 'a sub that returns foo', 'method responds properly');
-    };
+    #};
 }
 
+had_no_warnings;
