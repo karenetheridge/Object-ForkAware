@@ -3,6 +3,7 @@ use warnings FATAL => 'all';
 package PidTracker;
 
 our $instance = -1;
+our $VERSION = '1.234';
 
 sub new
 {

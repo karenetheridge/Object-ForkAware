@@ -5,6 +5,9 @@ package Object::ForkAware;
 # KEYWORDS: process thread fork multiprocessing multithreading clone
 # vim: set ts=8 sw=4 tw=78 et :
 
+use Scalar::Util 'blessed';
+use namespace::clean;
+
 sub new
 {
     my ($class, %opts) = @_;
@@ -34,6 +37,7 @@ sub _get_obj
 {
     my $self = shift;
 
+    return if not blessed $self;
     if (not defined $self->{_pid}
         or $$ != $self->{_pid}
         or defined $self->{_tid} and $self->{_tid} != threads->tid)
@@ -54,6 +58,16 @@ sub can
 {
     my ($self, $class) = @_;
     $self->SUPER::can($class) || $self->_get_obj->can($class);
+}
+
+sub VERSION
+{
+    my ($self, @args) = @_;
+
+    my $obj = $self->_get_obj;
+    return $obj
+        ? $obj->VERSION(@args)
+        : $self->SUPER::VERSION(@args);
 }
 
 our $AUTOLOAD;
@@ -160,7 +174,7 @@ There are no other public methods. All method calls on the object will be
 passed through to the containing object, after checking C<$$> and possibly
 recreating the object via the provided C<create> (or C<on_fork>) sub.
 
-=for Pod::Coverage::TrustPod isa can
+=for Pod::Coverage::TrustPod isa can VERSION
 
 =head1 LIMITATIONS
 

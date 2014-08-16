@@ -3,6 +3,7 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
           - now building with [@Author::ETHER]
           - minor documentation tweaks
+          - now also propagating ->VERSION calls to the underlying object
 
 0.001     2013-03-17 16:00:17Z
           - Initial release.

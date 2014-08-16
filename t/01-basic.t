@@ -12,6 +12,9 @@ use PidTracker;
 
 my $Test = Test::Builder->new;
 
+# give ourselves a predictable version
+$Object::ForkAware::VERSION = '999';
+
 {
     # the failure case...
 
@@ -82,7 +85,7 @@ $PidTracker::instance = -1;
         exit;
     }
 
-    $Test->current_test($Test->current_test + 9);
+    $Test->current_test($Test->current_test + 11);
 
     # make sure we do not continue until after the child process exits
     isnt(waitpid($child_pid, 0), '-1', 'waited for child to exit');
@@ -94,6 +97,9 @@ $PidTracker::instance = -1;
         qr/missing required option: create/,
         'create is required',
     );
+
+    is(Object::ForkAware->VERSION, '999', 'got the right version');
+    ok(eval { Object::ForkAware->VERSION('998'); 1 }, 'VERSION with args also works');
 }
 
 sub looks_like_a_pidtracker
@@ -107,6 +113,8 @@ sub looks_like_a_pidtracker
         ok($obj->can('foo'), '->can works as if we called it on the target object');
         is($obj->can('foo'), \&PidTracker::foo, '...and returns the correct reference');
         is($obj->foo, 'a sub that returns foo', 'method responds properly');
+        is($obj->VERSION, '1.234', "got the object's version, not Object::ForkAware's");
+        ok(!eval { $obj->VERSION('10'); 1 }, 'VERSION with args also propagates');
     #};
 }
 
