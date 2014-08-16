@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Object::ForkAware;
-# ABSTRACT: Make an object aware of process forks, recreating itself as needed
+# ABSTRACT: Make an object aware of process forks and threads, recreating itself as needed
 
 sub new
 {
@@ -103,7 +103,7 @@ it's an easy problem to run into.
 
 This module invisibly wraps your object and makes it fork-aware, automatically
 checking C<$$> on every access and recreating the object if the process id
-changes.  (This object is also thread-aware; if the thread id changes, the
+changes.  (The object is also thread-aware; if the thread id changes, the
 object is recreated in the same manner.)
 
 The object can be safely used with type checks and various type constraint
@@ -128,13 +128,11 @@ creation:
 
 =head1 METHODS
 
-=over
-
-=item * C<< new(option => val, option => val...) >>
+=head2 C<< new(option => val, option => val...) >>
 
 Provides an instance of this class.  Available options are:
 
-=over
+=over 4
 
 =item * C<create> (mandatory) - a sub reference containing the code to be run
 when the object is initially created (as well as recreated, if there is no
@@ -153,8 +151,6 @@ object is used. This prevents useless object creation if it is not to be used
 until after the first fork.
 If the object previously existed, it is passed as an argument to this method,
 allowing you to copy any state from the old object to the new one.
-
-=back
 
 =back
 
@@ -183,6 +179,8 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 The concept for this module came about through a conversation with Matt S.
 Trout <mst@shadowcat.co.uk> after experiencing the issue described in the
 synopsis on a prefork job-processing daemon.
+
+Some of the pid detection logic was inspired by the wonderful L<DBIx::Connector>.
 
 =head1 SEE ALSO
 
