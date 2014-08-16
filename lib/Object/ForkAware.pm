@@ -3,6 +3,7 @@ use warnings;
 package Object::ForkAware;
 # ABSTRACT: Make an object aware of process forks and threads, recreating itself as needed
 # KEYWORDS: process thread fork multiprocessing multithreading clone
+# vim: set ts=8 sw=4 tw=78 et :
 
 sub new
 {
