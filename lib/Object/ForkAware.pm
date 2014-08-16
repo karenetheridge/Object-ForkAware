@@ -13,7 +13,7 @@ sub new
     my ($class, %opts) = @_;
 
     my $self = {};
-    $self->{_create} = $opts{create} || die 'missing required option: create';
+    $self->{_create} = $opts{create} or die 'missing required option: create';
     $self->{_on_fork} = $opts{on_fork} if exists $opts{on_fork};
 
     $self = bless($self, $class);
