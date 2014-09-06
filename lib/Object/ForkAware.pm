@@ -56,8 +56,8 @@ sub isa
 
 sub can
 {
-    my ($self, $class) = @_;
-    $self->SUPER::can($class) || $self->_get_obj->can($class);
+    my ($self, $method) = @_;
+    $self->SUPER::can($method) || $self->_get_obj->can($method);
 }
 
 sub VERSION
