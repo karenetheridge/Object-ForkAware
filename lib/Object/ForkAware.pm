@@ -206,12 +206,9 @@ Some of the pid detection logic was inspired by the wonderful L<DBIx::Connector>
 
 =head1 SEE ALSO
 
-=begin :list
-
+=for :list
 * L<Object::Wrapper>
 * L<Object::Wrapper::Fork>
 * L<POSIX::AtFork>
-
-=end :list
 
 =cut
