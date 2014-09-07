@@ -40,7 +40,7 @@ sub _get_obj
     return if not blessed $self;
     if (not defined $self->{_pid}
         or $$ != $self->{_pid}
-        or defined $self->{_tid} and $self->{_tid} != threads->tid)
+        or $INC{'threads.pm'} and ($self->{_tid} || 0) != threads->tid)
     {
         $self->_create_obj($self->{_on_fork} || $self->{_create});
     }
