@@ -6,7 +6,7 @@ package Object::ForkAware;
 # vim: set ts=8 sw=4 tw=78 et :
 
 use Scalar::Util 'blessed';
-use namespace::clean;
+use namespace::autoclean;
 
 sub new
 {
