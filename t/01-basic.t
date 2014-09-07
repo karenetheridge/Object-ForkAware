@@ -76,6 +76,10 @@ $PidTracker::instance = -1;
         isnt($$, $parent_pid, 'we are no longer the same process');
 
         ok($obj->isa('Object::ForkAware'), 'object is ForkAware');
+        SKIP: {
+            skip 'perl 5.9.4 required for ->DOES', 1 if $] < '5.009004';
+            ok($obj->DOES('Object::ForkAware'), 'object does the ForkAware role')
+        }
 
         looks_like_a_pidtracker($obj);
         is($obj->pid, $$, 'object was created in the current process');
@@ -85,7 +89,7 @@ $PidTracker::instance = -1;
         exit;
     }
 
-    $Test->current_test($Test->current_test + 11);
+    $Test->current_test($Test->current_test + 13);
 
     # make sure we do not continue until after the child process exits
     isnt(waitpid($child_pid, 0), '-1', 'waited for child to exit');
@@ -110,6 +114,10 @@ sub looks_like_a_pidtracker
     # extra plan in the middle!
     #subtest 'object quacks like a PidTracker' => sub {
         ok($obj->isa('PidTracker'), '->isa works as if we called it on the target object');
+        SKIP: {
+            skip 'perl 5.9.4 required for UNIVERSAL::DOES', 1 if $] < '5.009004';
+            ok($obj->DOES('PidTracker'), '->DOES works as if we called it on the target object')
+        }
         ok($obj->can('foo'), '->can works as if we called it on the target object');
         is($obj->can('foo'), \&PidTracker::foo, '...and returns the correct reference');
         is($obj->foo, 'a sub that returns foo', 'method responds properly');
