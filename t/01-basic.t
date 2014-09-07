@@ -102,28 +102,6 @@ $PidTracker::instance = -1;
     ok(eval { Object::ForkAware->VERSION('998'); 1 }, 'VERSION with args also works');
 }
 
-{
-    is(
-        exception {
-            is(Object::ForkAware->can('can'), \&Object::ForkAware::can,
-                'can as a class method returns correct sub');
-            Object::ForkAware->can('nomethod');
-        },
-        undef,
-        "can as a class method doesn't crash",
-    );
-
-    is(
-        exception {
-            ok(Object::ForkAware->isa('Object::ForkAware'),
-                'isa as a class method checks isa of class');
-            Object::ForkAware->isa('Warble');
-        },
-        undef,
-        "isa as a class method doesn't crash",
-    );
-}
-
 sub looks_like_a_pidtracker
 {
     my $obj = shift;
