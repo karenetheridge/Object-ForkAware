@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - fixed implementation of ->isa and ->can when called as class
+            methods (RT#98096, Graham Knop)
 
 0.002     2014-08-16 21:32:20Z
           - now building with [@Author::ETHER]
