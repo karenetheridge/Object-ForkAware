@@ -177,7 +177,7 @@ allowing you to copy any state from the old object to the new one.
 =back
 
 There are no other public methods. All method calls on the object will be
-passed through to the containing object, after checking C<$$> and possibly
+passed through to the containing object, after checking C<$$> (or C<< threads->tid >>) and possibly
 recreating the object via the provided C<create> (or C<on_fork>) sub.
 
 =for Pod::Coverage::TrustPod isa can VERSION
@@ -199,7 +199,7 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =head1 ACKNOWLEDGEMENTS
 
 The concept for this module came about through a conversation with Matt S.
-Trout <mst@shadowcat.co.uk> after experiencing the issue described in the
+Trout C<mst@shadowcat.co.uk> after experiencing the issue described in the
 synopsis on a prefork job-processing daemon.
 
 Some of the pid detection logic was inspired by the wonderful L<DBIx::Connector>.
