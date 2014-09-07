@@ -51,13 +51,19 @@ sub _get_obj
 sub isa
 {
     my ($self, $class) = @_;
-    $self->SUPER::isa($class) || blessed($self) && $self->_get_obj->isa($class);
+    $self->SUPER::isa($class) || do {
+        my $obj = $self->_get_obj;
+        $obj && $obj->isa($class);
+    };
 }
 
 sub can
 {
     my ($self, $method) = @_;
-    $self->SUPER::can($method) || blessed($self) && $self->_get_obj->can($method);
+    $self->SUPER::can($method) || do {
+        my $obj = $self->_get_obj;
+        $obj && $obj->can($method);
+    };
 }
 
 sub VERSION
