@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.003     2014-09-07 22:16:29Z
           - fixed implementation of ->isa and ->can when called as class
             methods (RT#98096, Graham Knop)
 
