@@ -200,7 +200,7 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =head1 ACKNOWLEDGEMENTS
 
 The concept for this module came about through a conversation with Matt S.
-Trout C<mst@shadowcat.co.uk> after experiencing the issue described in the
+Trout (C<mst@shadowcat.co.uk>) after experiencing the issue described in the
 synopsis on a prefork job-processing daemon.
 
 Some of the pid detection logic was inspired by the wonderful L<DBIx::Connector>.
