@@ -5,8 +5,7 @@ package Object::ForkAware;
 # KEYWORDS: process thread fork multiprocessing multithreading clone
 # vim: set ts=8 sts=4 sw=4 tw=78 et :
 
-use Scalar::Util 'blessed';
-use namespace::autoclean;
+use Scalar::Util ();
 
 sub new
 {
@@ -37,7 +36,7 @@ sub _get_obj
 {
     my $self = shift;
 
-    return if not blessed $self;
+    return if not Scalar::Util::blessed($self);
     if (not defined $self->{_pid}
         or $$ != $self->{_pid}
         or $INC{'threads.pm'} and ($self->{_tid} || 0) != threads->tid)
