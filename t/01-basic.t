@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 
 use Test::More 'no_plan';
 use Test::Warnings 0.009 qw(:all :no_end_test);

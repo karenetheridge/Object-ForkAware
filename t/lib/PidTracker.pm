@@ -1,5 +1,5 @@
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 package PidTracker;
 
 our $instance = -1;
