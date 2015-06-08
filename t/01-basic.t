@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
+use Test::More 'no_plan';    # the test count is different in each process
 use Test::Warnings 0.009 qw(:all :no_end_test);
 use Test::Fatal;
 
