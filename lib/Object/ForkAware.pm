@@ -5,6 +5,8 @@ package Object::ForkAware;
 # KEYWORDS: process thread fork multiprocessing multithreading clone
 # vim: set ts=8 sts=4 sw=4 tw=78 et :
 
+our $VERSION = '0.004';
+
 use Scalar::Util ();
 
 sub new
