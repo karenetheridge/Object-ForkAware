@@ -77,7 +77,7 @@ $PidTracker::instance = -1;
 
         ok($obj->isa('Object::ForkAware'), 'object is ForkAware');
         SKIP: {
-            skip 'perl 5.9.4 required for ->DOES', 1 if $] < '5.009004';
+            skip 'perl 5.9.4 required for ->DOES', 1 if "$]" < '5.009004';
             ok($obj->DOES('Object::ForkAware'), 'object does the ForkAware role')
         }
 
@@ -115,7 +115,7 @@ sub looks_like_a_pidtracker
     #subtest 'object quacks like a PidTracker' => sub {
         ok($obj->isa('PidTracker'), '->isa works as if we called it on the target object');
         SKIP: {
-            skip 'perl 5.9.4 required for UNIVERSAL::DOES', 1 if $] < '5.009004';
+            skip 'perl 5.9.4 required for UNIVERSAL::DOES', 1 if "$]" < '5.009004';
             ok($obj->DOES('PidTracker'), '->DOES works as if we called it on the target object')
         }
         ok($obj->can('foo'), '->can works as if we called it on the target object');
