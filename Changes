@@ -1,6 +1,7 @@
 Revision history for Object-ForkAware
 
 {{$NEXT}}
+          - reduced prerequisites, updated tooling
 
 0.003     2014-09-07 22:16:29Z
           - fixed implementation of ->isa and ->can when called as class
