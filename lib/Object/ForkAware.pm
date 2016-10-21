@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 package Object::ForkAware;
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 # ABSTRACT: Make an object aware of process forks and threads, recreating itself as needed
 # KEYWORDS: process thread fork multiprocessing multithreading clone
-# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '0.004';
 
