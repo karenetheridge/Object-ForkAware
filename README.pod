@@ -8,7 +8,7 @@ Object::ForkAware - Make an object aware of process forks and threads, recreatin
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
@@ -105,18 +105,10 @@ Using the L<Object::ForkAware> object with an operator that the containing
 object has overloaded will not work; behaviour is as if there was no operator
 overloading.  Partial support is possible, but is not yet implemented.
 
-=head1 SUPPORT
-
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Object-ForkAware>
-(or L<mailto:bug-Object-ForkAware@rt.cpan.org>).
-I am also usually active on irc, as 'ether' at C<irc.perl.org>.
-
 =head1 ACKNOWLEDGEMENTS
 
 The concept for this module came about through a conversation with Matt S.
-Trout C<mst@shadowcat.co.uk> after experiencing the issue described in the
+Trout (C<mst@shadowcat.co.uk>) after experiencing the issue described in the
 synopsis on a prefork job-processing daemon.
 
 Some of the pid detection logic was inspired by the wonderful L<DBIx::Connector>.
@@ -139,21 +131,28 @@ L<POSIX::AtFork>
 
 =back
 
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Object-ForkAware>
+(or L<bug-Object-ForkAware@rt.cpan.org|mailto:bug-Object-ForkAware@rt.cpan.org>).
+
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
+
 =head1 AUTHOR
 
 Karen Etheridge <ether@cpan.org>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2013 by Karen Etheridge.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
 
 =head1 CONTRIBUTOR
 
 =for stopwords Graham Knop
 
 Graham Knop <haarg@haarg.org>
+
+=head1 COPYRIGHT AND LICENCE
+
+This software is copyright (c) 2013 by Karen Etheridge.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
