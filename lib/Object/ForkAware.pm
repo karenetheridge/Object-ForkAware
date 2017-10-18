@@ -119,9 +119,9 @@ __END__
 If you've ever had an object representing a network connection to some server,
 or something else containing a socket, a filehandle, etc, and used it in a
 program that forks, and then forgot to close and reopen your socket/handle
-etc, you'll know what chaos can ensue. Depending on the type of connection,
+etc in the new process, you'll know what chaos can ensue. Depending on the type of connection,
 you can have multiple processes trying to write to the same resource at once,
-or simultaneous reads getting each other's data, etc etc. It's horrible, and
+or simultaneous reads getting each other's data, dogs and cats living together... It's horrible, and
 it's an easy problem to run into.
 
 This module invisibly wraps your object and makes it fork-aware, automatically
@@ -172,7 +172,7 @@ allowing you to copy any state from the old object to the new one.
 
 =item * C<lazy> - a boolean (defaults to false) - when true, the C<create> sub
 is not called immediately, but instead deferred until the first time the
-object is used. This prevents useless object creation if it is not to be used
+object is used. This prevents useless object creation if it is not likely to be used
 until after the first fork.
 
 =back
