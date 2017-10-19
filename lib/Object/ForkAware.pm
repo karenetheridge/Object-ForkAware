@@ -5,7 +5,7 @@ package Object::ForkAware;
 # ABSTRACT: Make an object aware of process forks and threads, recreating itself as needed
 # KEYWORDS: process thread fork multiprocessing multithreading clone
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 use Scalar::Util ();
 
